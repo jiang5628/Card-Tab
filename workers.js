@@ -1,3 +1,7 @@
+export default {
+  async fetch(request) {
+
+    const html = `
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -14,7 +18,6 @@
         overflow-x: hidden;
     }
 
-    /* 夜空背景 */
     .sky {
         position: fixed;
         inset: 0;
@@ -22,7 +25,6 @@
         z-index: -2;
     }
 
-    /* 轻微闪烁的光点 */
     .star {
         position: absolute;
         width: 2px;
@@ -38,7 +40,6 @@
         50% { opacity: 0.9; }
     }
 
-    /* 烛台区域 */
     .candle-container {
         text-align: center;
         margin-top: 60px;
@@ -63,7 +64,7 @@
         width: 22px;
         height: 35px;
         background: radial-gradient(ellipse at bottom, #fff7c0, #ff9900);
-        border-radius: 50% 50% 50% 50%;
+        border-radius: 50%;
         animation: flicker 1.5s infinite ease-in-out;
         filter: blur(1px);
     }
@@ -112,7 +113,6 @@
 <div class="sky"></div>
 
 <script>
-    /* 生成星星 */
     for (let i = 0; i < 120; i++) {
         let star = document.createElement("div");
         star.className = "star";
@@ -135,51 +135,61 @@
     <article>
         <h2>Un Desiderio Acceso come una Candela</h2>
         <p>
-            In un tempo in cui l’umanità sembra oscillare tra speranza e timore,
-            la luce di una semplice candela ci ricorda che ogni gesto di pace,
-            per quanto piccolo, può rischiarare l’oscurità del mondo.
-            Il nostro desiderio è che nessun popolo debba più conoscere il dolore
-            della guerra, che nessuna famiglia debba temere il suono delle armi,
-            e che nessun bambino debba crescere tra la paura e la distruzione.
+            In un mondo spesso immerso nell’incertezza, la luce di una candela
+            diventa un simbolo di speranza. Che ogni popolo possa conoscere
+            solo la serenità, e che nessun cuore debba più temere il rumore
+            della guerra o della distruzione.
         </p>
     </article>
 
     <article>
         <h2>Il Valore della Vita e la Forza del Rispetto</h2>
         <p>
-            La pace non è soltanto l’assenza di conflitto, ma una scelta quotidiana:
-            la scelta di vedere nell’altro un essere umano degno di dignità e ascolto.
-            Ogni nazione, ogni cultura, ogni fede possiede un frammento unico
-            dell’eredità dell’umanità. Quando impariamo a rispettarci,
-            costruiamo muri contro l’odio e ponti verso la comprensione.
+            La pace nasce dal rispetto reciproco. Ogni cultura, ogni voce,
+            ogni storia merita ascolto. Quando scegliamo di comprenderci
+            invece di giudicarci, apriamo la porta a un mondo più giusto,
+            più umano, più luminoso.
         </p>
     </article>
 
     <article>
         <h2>Un Futuro senza Paura</h2>
         <p>
-            Che il nostro mondo possa imparare a proteggere la vita invece di distruggerla.
-            Che la diplomazia prevalga sulla violenza, il dialogo sul sospetto,
-            la solidarietà sull’indifferenza. Non chiediamo un’utopia,
-            ma un futuro in cui i popoli possano vivere senza la minaccia continua
-            della devastazione. Un futuro in cui l’unica esplosione sia quella
-            del sorriso di un bambino.
+            Che il domani sia un luogo dove i bambini possano crescere senza
+            il peso della violenza, dove i sogni non vengano spezzati dalle
+            armi, e dove l’unico eco del cielo sia quello della libertà.
         </p>
     </article>
 
     <article>
         <h2>Una Chiamata alla Responsabilità Comune</h2>
         <p>
-            La pace è un compito che appartiene a tutti.
-            È un impegno che va oltre le frontiere e i governi,
-            e che si fonda su decisioni semplici: parlare con gentilezza,
-            aiutare chi soffre, rifiutare l’odio e l’ingiustizia.
-            Accendiamo una candela non solo per ricordare,
-            ma per scegliere consapevolmente la strada della speranza.
+            La pace appartiene a tutti noi. È un impegno quotidiano, fatto di
+            piccoli gesti e grandi scelte. Accendiamo questa candela come
+            segno del nostro desiderio di un mondo migliore, un mondo senza
+            guerra, un mondo dove l’umanità possa finalmente respirare in armonia.
         </p>
     </article>
-
 </div>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (regs) {
+        for (let reg of regs) {
+            reg.unregister();
+        }
+    });
+}
+</script>
 
 </body>
 </html>
+`;
+
+    return new Response(html, {
+      headers: {
+        "content-type": "text/html; charset=UTF-8",
+      }
+    });
+  }
+};
